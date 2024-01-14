@@ -3,18 +3,36 @@ import { createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#2196f3', // Your primary color
+      main: '#181818', 
     },
     secondary: {
-      main: '#ff4081', // Your secondary color
+      main: '#404040', 
     },
     background: {
-      default: '#808080', // Set the default background color
+      default: '#B3B3B3',
     },
   },
   typography: {
     fontFamily: 'Roboto, sans-serif',
-    fontSize: 16,
+    fontSize: 12,
+  },  
+  components: {
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          color: '#ffffff ',
+          border: '1px solid #ffffff'
+        },
+      },
+    },
+    MuiButtonBase: {
+      styleOverrides: {
+        root: {
+          color: '#ffffff ',
+          border: '1px solid #ffffff'
+        },
+      },
+    },
   },
 });
 

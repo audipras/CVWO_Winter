@@ -1,25 +1,7 @@
-import { Box, Button } from "@mui/material";
+import MainBox from "./Components/MainBox";
 
 function Signin() {
-  return (
-    <>
-      <Box sx={{ height: "20vh" }}>
-        <Button sx={{}}>Home</Button>
-      </Box>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "80vh",
-        }}
-      >
-        <Button variant="outlined" size="large">
-          Log In
-        </Button>
-      </Box>
-    </>
-  );
+  return <MainBox children={undefined}></MainBox>;
 }
 
 export default Signin;
