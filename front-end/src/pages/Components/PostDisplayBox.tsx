@@ -7,14 +7,14 @@ function PostDisplayBox() {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "60vh",
+        height: "90vh",
         backgroundColor: "secondary.main",
-        width: "40vh",
+        width: "80vh",
+        borderRadius: "16px",
+        borderBottomLeftRadius: "0",
+        borderBottomRightRadius: "0",
       }}
-    >
-      {" "}
-      TEST{" "}
-    </Box>
+    ></Box>
   );
 }
 

@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { AppBar, Toolbar, Typography } from "@mui/material";
+import { AppBar, Toolbar, Tooltip, Typography } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import { AccountCircle } from "@mui/icons-material";
+import ProfileMenu from "./ProfileMenu";
 
 function Topbar() {
   const linkStyle = {
@@ -21,17 +22,14 @@ function Topbar() {
         }}
       >
         <div>
-          <Link to="/Home" style={linkStyle}>
-            <HomeIcon sx={{ fontSize: "50px" }} />
-          </Link>
+          <Tooltip title="Home" arrow>
+            <Link to="/Home" style={linkStyle}>
+              <HomeIcon sx={{ fontSize: "50px" }} />
+            </Link>
+          </Tooltip>
         </div>
         <div>
-          <Link to="/Profile" style={linkStyle}>
-            <AccountCircle sx={{ fontSize: "50px" }} />{" "}
-            {
-              //remember to change AccountCircle to pfp in the future
-            }
-          </Link>
+          <ProfileMenu></ProfileMenu>
         </div>
       </Toolbar>
     </AppBar>

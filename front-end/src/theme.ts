@@ -20,7 +20,7 @@ const theme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          color: '#ffffff ',
+          color: '#808080',
           border: '1px solid #ffffff'
         },
       },
@@ -28,7 +28,7 @@ const theme = createTheme({
     MuiButtonBase: {
       styleOverrides: {
         root: {
-          color: '#ffffff ',
+          color: '#808080',
           border: '1px solid #ffffff'
         },
       },

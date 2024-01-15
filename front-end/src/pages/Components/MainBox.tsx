@@ -13,10 +13,13 @@ const MainBox = ({ children, ...props }: MainBoxProps) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        height: "92vh",
+        height: "90vh",
         backgroundColor: "background.default",
+        paddingTop: "2vh",
       }}
-    ></Box>
+    >
+      {children}
+    </Box>
   );
 };
 
