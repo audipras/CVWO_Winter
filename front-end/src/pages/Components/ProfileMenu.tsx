@@ -28,7 +28,7 @@ const IconWithTooltipAndMenu = () => {
     <div>
       <Tooltip title="Profile" arrow>
         <IconButton onClick={handleOpenMenu}>
-          <AccountCircle />
+          <AccountCircle sx={{ color: "#ffffff", fontSize: "50px" }} />
         </IconButton>
       </Tooltip>
 

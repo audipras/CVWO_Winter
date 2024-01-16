@@ -25,14 +25,6 @@ const theme = createTheme({
         },
       },
     },
-    MuiButtonBase: {
-      styleOverrides: {
-        root: {
-          color: '#808080',
-          border: '1px solid #ffffff'
-        },
-      },
-    },
   },
 });
 
