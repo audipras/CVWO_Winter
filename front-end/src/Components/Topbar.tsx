@@ -19,12 +19,13 @@ function Topbar() {
           height: "8vh",
           justifyContent: "space-between",
           alignItems: "center",
+          flexDirection: "row",
         }}
       >
         <div>
           <Tooltip title="Home" arrow>
             <Link to="/Home" style={linkStyle}>
-              <HomeIcon sx={{ fontSize: "50px" }} />
+              <img src="/Minun.png" alt="Minun" width="75" height="75" />
             </Link>
           </Tooltip>
         </div>

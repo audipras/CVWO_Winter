@@ -1,6 +1,6 @@
-import MainBox from "./Components/MainBox";
-import PostDisplayBox from "./Components/PostDisplayBox";
-import Topbar from "./Components/Topbar";
+import MainBox from "../Components/MainBox";
+import PostDisplayBox from "../Components/PostDisplayBox";
+import Topbar from "../Components/Topbar";
 
 function Circles() {
   return (

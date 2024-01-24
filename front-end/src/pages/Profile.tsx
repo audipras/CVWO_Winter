@@ -1,5 +1,5 @@
-import Topbar from "./Components/Topbar";
-import MainBox from "./Components/MainBox";
+import Topbar from "../Components/Topbar";
+import MainBox from "../Components/MainBox";
 
 function Profile() {
   return (
