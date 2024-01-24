@@ -1,27 +1,29 @@
 package controllers
 
 import (
-	"example/back-end"
-	"github.com/gin-gonic/gin"
+	"example/back-end/database"
+	"example/back-end/models"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func CreatePost(c *gin.Context) {
-	var post Post
+	var post models.Post
 
 	if err := c.BindJSON(&post); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
-	db.Create(&post)
+	database.DB.Create(&post)
 	c.JSON(http.StatusOK, post)
 }
 
 func GetPosts(c *gin.Context) {
-	var posts []Post
+	var posts []models.Post
 
-	if err := db.Find(&posts).Error; err != nil {
+	if err := database.DB.Find(&posts).Error; err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
@@ -31,5 +33,5 @@ func GetPosts(c *gin.Context) {
 func DeletePost(c *gin.Context) {
 	id := c.Param("id")
 
-	db.Where("id = ?", id).Delete(Post{})
+	database.DB.Where("id = ?", id).Delete(models.Post{})
 }
