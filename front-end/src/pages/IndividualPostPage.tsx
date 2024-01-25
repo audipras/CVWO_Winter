@@ -12,6 +12,7 @@ import toast from "react-hot-toast";
 import EditIcon from "@mui/icons-material/Edit";
 import EditDialogBox from "./EditDialogBox";
 import DeleteIcon from "@mui/icons-material/Delete";
+import DeleteDialog from "../Components/DeleteDialog";
 
 function IndividualPostPage() {
   const param = useParams();
@@ -19,6 +20,7 @@ function IndividualPostPage() {
   const [loading, setLoading] = useState(true);
 
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
   const handleOpenDialog = () => {
     setDialogOpen(true);
@@ -35,12 +37,21 @@ function IndividualPostPage() {
   };
   const navigate = useNavigate();
 
+  const openDeleteDialog = () => {
+    setDeleteDialogOpen(true);
+  };
+
+  const closeDeleteDialog = () => {
+    setDeleteDialogOpen(false);
+  };
+
   const handleDeletePost = () => {
     axios
       .delete(`http://localhost:8080/posts/${post!.id}`, config)
       .then((response) => {
         // handle success, the backend's response is available in 'response.data'
         toast.success("Post deleted successfully");
+        handleCloseDialog();
         navigate("/Home");
       })
       .catch((error) => {
@@ -143,9 +154,14 @@ function IndividualPostPage() {
               <IconButton
                 sx={{ position: "absolute", bottom: "10px", right: "50px" }}
               >
-                <DeleteIcon onClick={handleDeletePost}></DeleteIcon>
+                <DeleteIcon onClick={openDeleteDialog}></DeleteIcon>
               </IconButton>
             </Tooltip>
+            <DeleteDialog
+              open={deleteDialogOpen}
+              onClose={closeDeleteDialog}
+              handleDeletePost={handleDeletePost}
+            />
             <EditDialogBox
               open={dialogOpen}
               onClose={handleCloseDialog}
