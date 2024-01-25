@@ -41,10 +41,28 @@ func GetPosts(c *gin.Context) {
 func DeletePost(c *gin.Context) {
 	id := c.Param("id")
 
+	var databasePost models.Post
+
+	if err := database.DB.Where("id = ?", id).First(&databasePost); err.Error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error.Error()})
+		return
+	}
+
+	userid, err := authorisation.ValidateJWTToken(c.GetHeader("Authorization"))
+	if err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "error deleting post"})
+		return
+	}
+	if userid != databasePost.UserID {
+		c.JSON(http.StatusBadRequest, gin.H{"error": "Not authorised to edit post"})
+		return
+	}
+
 	if err := database.DB.Where("id = ?", id).Delete(models.Post{}); err.Error != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error.Error()})
 		return
 	}
+	c.JSON(http.StatusOK, gin.H{"error": "Successfully Deleted"})
 }
 
 func EditPost(c *gin.Context) {

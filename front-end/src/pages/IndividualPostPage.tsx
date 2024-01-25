@@ -5,12 +5,13 @@ import { IconButton, Paper, Tooltip, Typography } from "@mui/material";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { CommentType, Post } from "../types.interface";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import CommentBox from "../Components/CommentBox";
 import InputComment from "../Components/InputComment";
 import toast from "react-hot-toast";
 import EditIcon from "@mui/icons-material/Edit";
 import EditDialogBox from "./EditDialogBox";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 function IndividualPostPage() {
   const param = useParams();
@@ -25,6 +26,28 @@ function IndividualPostPage() {
 
   const handleCloseDialog = () => {
     setDialogOpen(false);
+  };
+
+  const config = {
+    headers: {
+      Authorization: localStorage.getItem("token") || "",
+    },
+  };
+  const navigate = useNavigate();
+
+  const handleDeletePost = () => {
+    axios
+      .delete(`http://localhost:8080/posts/${post!.id}`, config)
+      .then((response) => {
+        // handle success, the backend's response is available in 'response.data'
+        console.log("Backend response:", response.data);
+        toast.success("Post deleted successfully");
+        navigate("/Home");
+      })
+      .catch((error) => {
+        console.error("Error deleting post", error);
+        toast.error("Error deleting post");
+      });
   };
 
   const fetchPost = async () => {
@@ -116,6 +139,13 @@ function IndividualPostPage() {
                 sx={{ position: "absolute", bottom: "10px", right: "10px" }}
               >
                 <EditIcon onClick={handleOpenDialog}></EditIcon>
+              </IconButton>
+            </Tooltip>
+            <Tooltip title="Delete" arrow>
+              <IconButton
+                sx={{ position: "absolute", bottom: "10px", right: "50px" }}
+              >
+                <DeleteIcon onClick={handleDeletePost}></DeleteIcon>
               </IconButton>
             </Tooltip>
             <EditDialogBox
