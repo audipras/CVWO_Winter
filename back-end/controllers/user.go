@@ -52,7 +52,7 @@ func SignIn(c *gin.Context) {
 	}
 
 	if databaseUser.Password == user.Password {
-		token, err := authorisation.GenerateJWTToken(user.ID)
+		token, err := authorisation.GenerateJWTToken(databaseUser.ID)
 		if err != nil {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
