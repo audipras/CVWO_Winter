@@ -55,7 +55,7 @@ func SignIn(c *gin.Context) {
 		}
 		c.JSON(http.StatusOK, gin.H{"token": token})
 	} else {
-		c.JSON(http.StatusUnauthorised, gin.H{"error": "Error: Invalid Password."})
+		c.JSON(http.StatusUnauthorized, gin.H{"error": "Error: Invalid Password."})
 		return
 	}
 

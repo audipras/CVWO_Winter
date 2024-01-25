@@ -12,16 +12,40 @@ const IndividualPostBox: React.FC<postProps> = ({ post }) => {
     <Box
       sx={{
         display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
+        flexDirection: "column",
         height: "15vh",
         backgroundColor: "grey",
+        paddingTop: "2vh",
         borderRadius: "5px",
         marginBottom: "10px",
+        border: "1px solid #A9A9A9",
+        paddingLeft: "2vh",
+        overflow: "hidden",
       }}
     >
-      <Typography sx={{ color: "white" }}>{post.title}</Typography>
-      <Typography sx={{ color: "white" }}>{post.body}</Typography>
+      <Typography
+        sx={{
+          color: "white",
+          fontSize: "1.5rem",
+          marginBottom: "8px",
+          fontWeight: "bold",
+          overflow: "hidden",
+        }}
+      >
+        {post.title}
+      </Typography>
+
+      <Typography
+        sx={{
+          color: "white",
+          fontSize: "1rem",
+          overflow: "hidden",
+          textOverflow: "ellipsis",
+          whiteSpace: "pre-line",
+        }}
+      >
+        {post.body}
+      </Typography>
     </Box>
   );
 };

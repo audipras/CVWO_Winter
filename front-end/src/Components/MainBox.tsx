@@ -11,11 +11,13 @@ const MainBox = ({ children, ...props }: MainBoxProps) => {
       {...props}
       sx={{
         display: "flex",
+        flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: "90vh",
+        height: "100%",
+        minHeight: "90vh",
         backgroundColor: "background.default",
-        paddingTop: "2vh",
+        paddingTop: "2vh", //keep
       }}
     >
       {children}

@@ -50,7 +50,7 @@ function CreatePost() {
         }}
         sx={{ color: "primary.main" }}
         id="outlined-basic"
-        placeholder="Create Post"
+        placeholder="Create Post..."
         variant="outlined"
         style={{ width: "80vh" }}
         onClick={handleOpenDialog}
