@@ -32,8 +32,8 @@ function PostDisplayBox() {
         justifyContent: "top",
         alignItems: "top",
         height: "100%",
-        minHeight: "87.75vh",
-        width: "80vh",
+        minHeight: "87.75vh", //please change this idiot
+        width: "40vw",
         backgroundColor: "#666699",
         padding: "10px",
         borderRadius: "16px",

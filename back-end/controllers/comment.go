@@ -20,18 +20,11 @@ func CreateComment(c *gin.Context) {
 	c.JSON(http.StatusOK, comment)
 }
 
-func GetComments(c *gin.Context) {
-	var comments []models.Comment
-
-	if err := database.DB.Find(&comments).Error; err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-		return
-	}
-	c.IndentedJSON(http.StatusOK, comments)
-}
-
 func DeleteComments(c *gin.Context) {
 	id := c.Param("id")
 
-	database.DB.Where("id = ?", id).Delete(models.Comment{})
+	if err := database.DB.Where("id = ?", id).Delete(models.Comment{}); err.Error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error.Error()})
+		return
+	}
 }

@@ -33,5 +33,19 @@ func GetPosts(c *gin.Context) {
 func DeletePost(c *gin.Context) {
 	id := c.Param("id")
 
-	database.DB.Where("id = ?", id).Delete(models.Post{})
+	if err := database.DB.Where("id = ?", id).Delete(models.Post{}); err.Error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error.Error()})
+		return
+	}
+}
+
+func GetSpecificPost(c *gin.Context) {
+	id := c.Param("id")
+	var post models.Post
+
+	if err := database.DB.Preload("Comments").Where("id = ?", id).First(&post); err.Error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error.Error()})
+		return
+	}
+	c.JSON(http.StatusOK, post)
 }
