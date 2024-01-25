@@ -16,7 +16,7 @@ const MainBox = ({ children, ...props }: MainBoxProps) => {
         alignItems: "center",
         height: "100%",
         minHeight: "90vh",
-        backgroundColor: "background.default",
+        backgroundColor: "#181818",
         paddingTop: "2vh", //keep
       }}
     >

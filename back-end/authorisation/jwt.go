@@ -2,7 +2,6 @@ package authorisation
 
 import (
 	"fmt"
-	"strconv"
 	"time"
 
 	"github.com/dgrijalva/jwt-go"
@@ -12,6 +11,7 @@ var jwtKey = []byte("D2g.|YRlATJhf)VD~xX79rs7v1f2Gv")
 
 type Claims struct {
 	jwt.StandardClaims
+	UserID int
 }
 
 func GenerateJWTToken(userID int) (string, error) {
@@ -20,8 +20,8 @@ func GenerateJWTToken(userID int) (string, error) {
 	claims := &Claims{
 		StandardClaims: jwt.StandardClaims{
 			ExpiresAt: expirationTime.Unix(),
-			Subject:   fmt.Sprint(userID), // Convert userID to string and set as Subject
 		},
+		UserID: userID,
 	}
 
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
@@ -48,12 +48,7 @@ func ValidateJWTToken(tokenString string) (int, error) {
 		return 0, fmt.Errorf("Invalid token")
 	}
 
-	userIDStr := token.Claims.(*Claims).StandardClaims.Subject
+	userIDInt := token.Claims.(*Claims).UserID
 
-	userID, err := strconv.Atoi(userIDStr)
-	if err != nil {
-		return 0, fmt.Errorf("Failed to convert user ID to integer: %v", err)
-	}
-
-	return userID, nil
+	return userIDInt, nil
 }

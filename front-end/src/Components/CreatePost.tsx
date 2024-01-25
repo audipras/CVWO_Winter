@@ -1,11 +1,15 @@
 import { Button, TextField } from "@mui/material";
-import CreatePostDialog from "../pages/PostPage";
+import CreatePostDialog from "../pages/CreatePostDialog";
 import { useState } from "react";
 import { LineAxisOutlined } from "@mui/icons-material";
 import axios from "axios";
 import { Post } from "../types.interface";
+import toast from "react-hot-toast";
 
-function CreatePost() {
+interface CreatePostProps {
+  fetchdata: () => void;
+}
+function CreatePost({ fetchdata }: CreatePostProps) {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   const handleOpenDialog = () => {
@@ -24,21 +28,33 @@ function CreatePost() {
 
     if (isInvalidPost(postContent)) {
       console.error("Invalid post content. Title and body are required.");
+      toast.error("Invalid post content. Title and body are required.");
       return;
     }
 
     console.log("Creating post with data:");
     const backendEndpoint = "http://localhost:8080/posts"; //temporary address
 
+    const config = {
+      headers: {
+        Authorization: localStorage.getItem("token"),
+      },
+    };
+
     axios
-      .post(backendEndpoint, postContent)
+      .post(backendEndpoint, postContent, config)
       .then((response) => {
         // handle success, the backend's response is available in 'response.data'
         console.log("Backend response:", response.data);
+        fetchdata();
+        toast.success("Successfully created post");
+        handleCloseDialog();
+
       })
       .catch((error) => {
         // handle error
-        console.error("Error creating user:", error);
+        console.error("Error creating post", error);
+        toast.error("Error creating post");
       });
   };
 
@@ -52,7 +68,7 @@ function CreatePost() {
         id="outlined-basic"
         placeholder="Create Post..."
         variant="outlined"
-        style={{ width: "80vh" }}
+        fullWidth
         onClick={handleOpenDialog}
         focused={false}
       ></TextField>

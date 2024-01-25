@@ -7,31 +7,30 @@ import { User } from "../types.interface";
 import { Box } from "@mui/system";
 import { Form, Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
+import Confetti from "react-confetti/dist/types/Confetti";
 
-function Signin() {
+function Signup() {
   const navigate = useNavigate();
-  const [signInDetails, setSignInDetails] = useState({
+  const [signUpDetails, setSignUpDetails] = useState({
     username: "",
     password: "",
   });
 
-  const handleSignIn = (e: React.FormEvent) => {
+  const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
-    const backendEndpoint = "http://localhost:8080/users/signin";
+    const backendEndpoint = "http://localhost:8080/users";
     axios
-      .post(backendEndpoint, signInDetails)
+      .post(backendEndpoint, signUpDetails)
       .then((response) => {
         // handle success, the backend's response is available in 'response.data'
         console.log("Backend response:", response.data);
-        toast.success("Successfully logged in!");
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("user", response.data.userid);
-        navigate("/home");
+        toast.success("Successfully signed up!");
+        navigate("/Signin");
       })
       .catch((error) => {
         // handle error
-        console.error("Error signing in", error);
-        toast.error("Error signing in");
+        console.error("Error signing up", error);
+        toast.error("Error signing up");
       });
   };
 
@@ -40,7 +39,7 @@ function Signin() {
       <MainBox>
         <Box
           component="form"
-          onSubmit={handleSignIn}
+          onSubmit={handleSignUp}
           sx={{
             transform: "translateY(-10vh)",
             display: "flex",
@@ -59,14 +58,14 @@ function Signin() {
           <Typography
             sx={{ color: "white", fontSize: "3rem", fontWeight: "bold" }}
           >
-            Welcome to Circles!
+            Sign up now!
           </Typography>
           <TextField
             required
             onChange={(e) =>
-              setSignInDetails({
+              setSignUpDetails({
                 username: e.target.value,
-                password: signInDetails.password,
+                password: signUpDetails.password,
               })
             }
             placeholder="Username"
@@ -75,8 +74,8 @@ function Signin() {
           <TextField
             required
             onChange={(e) =>
-              setSignInDetails({
-                username: signInDetails.username,
+              setSignUpDetails({
+                username: signUpDetails.username,
                 password: e.target.value,
               })
             }
@@ -84,19 +83,12 @@ function Signin() {
             placeholder="Password"
             sx={{ paddingBottom: "10px" }}
           />
-          <Typography fontSize="11px" sx={{ color: "text.secondary" }}>
-            Don't have an account? Click{" "}
-            <Link to="/signup" style={{ textDecoration: "none" }}>
-              here
-            </Link>{" "}
-            to sign up.
-          </Typography>
           <Button
             type="submit"
             color="primary"
             sx={{ width: "5vw", height: "4vh" }}
           >
-            Sign In
+            Sign Up
           </Button>
         </Box>
       </MainBox>
@@ -104,4 +96,4 @@ function Signin() {
   );
 }
 
-export default Signin;
+export default Signup;

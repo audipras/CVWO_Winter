@@ -3,6 +3,8 @@ import { AppBar, Toolbar, Tooltip, Typography } from "@mui/material";
 import HomeIcon from "@mui/icons-material/Home";
 import { AccountCircle } from "@mui/icons-material";
 import ProfileMenu from "./ProfileMenu";
+import { Box, typography } from "@mui/system";
+import { relative } from "path";
 
 function Topbar() {
   const linkStyle = {
@@ -25,7 +27,15 @@ function Topbar() {
         <div>
           <Tooltip title="Home" arrow>
             <Link to="/Home" style={linkStyle}>
-              <img src="/Minun.png" alt="Minun" width="75" height="75" />
+              <Box sx={{ display: "flex", alignItems: "center" }}>
+                <img src="/Minun.png" alt="Minun" width="75" height="75" />
+                <Typography
+                  fontSize="30px"
+                  style={{ position: "relative", top: "5px" }}
+                >
+                  Circles
+                </Typography>
+              </Box>
             </Link>
           </Tooltip>
         </div>

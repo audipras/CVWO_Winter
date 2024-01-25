@@ -3,6 +3,7 @@ export interface Post {
     body: string;
     id?: number;
     comments?: CommentType[];
+    userid?: number;
 
 }
 
@@ -12,6 +13,7 @@ export interface User {
 }
 
 export interface CommentType {
+    id?: number
     userid: number;
     body: string;
 }

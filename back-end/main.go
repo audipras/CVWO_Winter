@@ -28,11 +28,11 @@ func main() {
 	router.POST("/posts", controllers.CreatePost)
 	router.GET("/posts", controllers.GetPosts)
 	router.GET("/posts/:id", controllers.GetSpecificPost)
+	router.PATCH("/posts/:id", controllers.EditPost)
 	router.DELETE("/posts/:id", controllers.DeletePost)
 
 	//Comment Struct Routers
 	router.POST("/comments", controllers.CreateComment)
-	// router.GET("/comments/:id", controllers.GetComments) //id here is post id not comment id
 	router.DELETE("/comments/:id", controllers.DeleteComments)
 
 	if err := router.Run(":8080"); err != nil {

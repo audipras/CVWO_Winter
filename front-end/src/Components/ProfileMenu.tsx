@@ -5,7 +5,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { AccountCircle } from "@mui/icons-material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const IconWithTooltipAndMenu = () => {
   const [anchorEl, setAnchorEl] = React.useState<HTMLElement | null>(null);
@@ -14,8 +15,18 @@ const IconWithTooltipAndMenu = () => {
     setAnchorEl(event.currentTarget);
   };
 
+  const navigate = useNavigate();
+
   const handleCloseMenu = () => {
     setAnchorEl(null);
+  };
+
+  const handleSignOut = () => {
+    handleCloseMenu();
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    navigate("/Signin");
+    toast.success("Successfully signed out!");
   };
 
   const linkStyle = {
@@ -42,7 +53,7 @@ const IconWithTooltipAndMenu = () => {
             Edit Profile
           </Link>
         </MenuItem>
-        <MenuItem onClick={handleCloseMenu}>Sign Out</MenuItem>
+        <MenuItem onClick={handleSignOut}>Sign Out</MenuItem>
       </Menu>
     </div>
   );

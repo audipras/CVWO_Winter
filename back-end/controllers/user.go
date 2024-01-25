@@ -38,8 +38,8 @@ func DeleteUser(c *gin.Context) {
 }
 
 func SignIn(c *gin.Context) {
-	var user models.User
-	var databaseUser models.User
+	var user models.User         //input
+	var databaseUser models.User //database
 
 	if err := c.BindJSON(&user); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
@@ -57,7 +57,7 @@ func SignIn(c *gin.Context) {
 			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 			return
 		}
-		c.JSON(http.StatusOK, gin.H{"token": token})
+		c.JSON(http.StatusOK, gin.H{"token": token, "userid": databaseUser.ID})
 	} else {
 		c.JSON(http.StatusUnauthorized, gin.H{"error": "Error: Invalid Password."})
 		return

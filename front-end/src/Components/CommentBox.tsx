@@ -15,7 +15,7 @@ const CommentBox: React.FC<commentProps> = ({ comment }) => {
         display: "flex",
         flexDirection: "column",
         minHeight: "15vh",
-        backgroundColor: "grey",
+        backgroundColor: "#0F4C75",
         paddingTop: "1vh",
         borderRadius: "5px",
         marginBottom: "10px",
@@ -32,7 +32,6 @@ const CommentBox: React.FC<commentProps> = ({ comment }) => {
           fontSize: "16px",
           overflow: "hidden",
           textOverflow: "ellipsis",
-          display: "-webkit-box",
           wordBreak: "break-word",
         }}
       >

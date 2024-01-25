@@ -1,24 +1,38 @@
-import { Card, Paper, Typography } from "@mui/material";
+import { Button, Card, Icon, Paper, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { Post } from "../types.interface";
 import { Box } from "@mui/system";
 import { Link } from "react-router-dom";
+import CommentIcon from "@mui/icons-material/Comment";
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import axios from "axios";
+import { config } from "process";
+import toast from "react-hot-toast";
 
 interface postProps {
   post: Post;
 }
 
 const IndividualPostBox: React.FC<postProps> = ({ post }) => {
+  var numberOfComments = 0;
+  console.log(post.comments);
+  if (post.comments == undefined) {
+  } else {
+    post.comments!.forEach((a) => (numberOfComments += 1));
+  }
+
   return (
     <Link to={`/post/${post.id}`} style={{ textDecoration: "none" }}>
       <Paper
         sx={{
+          position: "relative",
           display: "flex",
           flexDirection: "column",
           minHeight: "15vh",
-          backgroundColor: "grey",
+          backgroundColor: "#0F4C75",
           paddingTop: "1vh",
           borderRadius: "5px",
+          paddingBottom: "30px",
           marginBottom: "10px",
           border: "1px solid #A9A9A9",
           overflow: "hidden",
@@ -42,7 +56,6 @@ const IndividualPostBox: React.FC<postProps> = ({ post }) => {
         >
           {post.title}
         </Typography>
-
         <Typography
           sx={{
             color: "white",
@@ -57,7 +70,29 @@ const IndividualPostBox: React.FC<postProps> = ({ post }) => {
           }}
         >
           {post.body}
-        </Typography>
+        </Typography>{" "}
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            position: "absolute",
+            bottom: "5px",
+          }}
+        >
+          <CommentIcon sx={{ paddingRight: "2px" }}></CommentIcon>
+          <Typography> {String(numberOfComments)} Comments</Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "row",
+            position: "absolute",
+            top: "15px",
+            left: "15px",
+          }}
+        >
+          <FavoriteIcon sx={{ height: "40px", width: "40px" }}></FavoriteIcon>
+        </Box>
       </Paper>
     </Link>
   );

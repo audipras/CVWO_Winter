@@ -8,19 +8,18 @@ import { Post } from "../types.interface";
 function PostDisplayBox() {
   const [posts, setPosts] = useState<null | Post[]>(null);
   const [loading, setLoading] = useState(true);
+  const fetchPosts = async () => {
+    try {
+      const response = await axios.get("http://localhost:8080/posts");
+      setPosts(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await axios.get("http://localhost:8080/posts");
-        setPosts(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      } finally {
-        setLoading(false);
-      }
-    };
-
     fetchPosts();
   }, []);
 
@@ -34,7 +33,7 @@ function PostDisplayBox() {
         height: "100%",
         minHeight: "87.75vh", //please change this idiot
         width: "40vw",
-        backgroundColor: "#666699",
+        backgroundColor: "#1B262C",
         padding: "10px",
         borderRadius: "16px",
         borderBottomLeftRadius: "0",
@@ -43,12 +42,14 @@ function PostDisplayBox() {
       }}
     >
       {" "}
-      <CreatePost />
+      <CreatePost fetchdata={fetchPosts} />
       <div>
         {loading ? (
           <p>Loading...</p>
         ) : posts ? (
-          posts.map((post: Post) => <IndividualPostBox post={post} />)
+          posts
+            .sort((a, b) => b.id! - a.id!) //sort by id
+            .map((post: Post) => <IndividualPostBox post={post} />)
         ) : (
           <p>No posts available</p>
         )}

@@ -28,9 +28,10 @@ const CreatePostDialog: React.FC<CreatePostDialogProps> = ({
   const handleCreatePost = () => {
     // Handle creating the post (e.g., send data to the server)
     onCreatePost(postContent);
-
-    // Close the dialog
-    onClose();
+    setPostContent({
+      title: "",
+      body: "",
+    });
   };
 
   return (
@@ -38,6 +39,7 @@ const CreatePostDialog: React.FC<CreatePostDialogProps> = ({
       <DialogTitle>
         <Typography fontSize={30}> Create Post</Typography>
         <TextField
+          required
           inputProps={{ sx: { fontSize: "30px" } }}
           autoFocus
           margin="dense"
@@ -57,6 +59,7 @@ const CreatePostDialog: React.FC<CreatePostDialogProps> = ({
       </DialogTitle>
       <DialogContent>
         <TextField
+          required
           autoFocus
           margin="dense"
           id="body"
