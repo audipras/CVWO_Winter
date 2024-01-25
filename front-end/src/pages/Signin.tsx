@@ -22,7 +22,6 @@ function Signin() {
       .post(backendEndpoint, signInDetails)
       .then((response) => {
         // handle success, the backend's response is available in 'response.data'
-        console.log("Backend response:", response.data);
         toast.success("Successfully logged in!");
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", response.data.userid);

@@ -40,7 +40,6 @@ function IndividualPostPage() {
       .delete(`http://localhost:8080/posts/${post!.id}`, config)
       .then((response) => {
         // handle success, the backend's response is available in 'response.data'
-        console.log("Backend response:", response.data);
         toast.success("Post deleted successfully");
         navigate("/Home");
       })

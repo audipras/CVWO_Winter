@@ -31,7 +31,6 @@ function CreatePost({ fetchdata }: CreatePostProps) {
       return;
     }
 
-    console.log("Creating post with data:");
     const backendEndpoint = "http://localhost:8080/posts"; //temporary address
 
     const config = {
@@ -44,7 +43,6 @@ function CreatePost({ fetchdata }: CreatePostProps) {
       .post(backendEndpoint, postContent, config)
       .then((response) => {
         // handle success, the backend's response is available in 'response.data'
-        console.log("Backend response:", response.data);
         fetchdata();
         toast.success("Successfully created post");
         handleCloseDialog();

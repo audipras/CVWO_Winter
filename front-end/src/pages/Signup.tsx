@@ -23,7 +23,6 @@ function Signup() {
       .post(backendEndpoint, signUpDetails)
       .then((response) => {
         // handle success, the backend's response is available in 'response.data'
-        console.log("Backend response:", response.data);
         toast.success("Successfully signed up!");
         navigate("/Signin");
       })

@@ -15,7 +15,6 @@ interface postProps {
 
 const IndividualPostBox: React.FC<postProps> = ({ post }) => {
   var numberOfComments = 0;
-  console.log(post.comments);
   if (post.comments == undefined) {
   } else {
     post.comments!.forEach((a) => (numberOfComments += 1));

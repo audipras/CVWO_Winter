@@ -42,7 +42,6 @@ const EditDialogBox: React.FC<EditPostDialogProps> = ({
       .patch(backendEndpoint, editedPost, config)
       .then((response) => {
         // handle success, the backend's response is available in 'response.data'
-        console.log("Backend response:", response.data);
         toast.success("Post edited successfully");
         onEditPost();
         onClose(); // Close the dialog after successful edit
