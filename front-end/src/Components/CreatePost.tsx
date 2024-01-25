@@ -27,7 +27,6 @@ function CreatePost({ fetchdata }: CreatePostProps) {
     };
 
     if (isInvalidPost(postContent)) {
-      console.error("Invalid post content. Title and body are required.");
       toast.error("Invalid post content. Title and body are required.");
       return;
     }
@@ -49,11 +48,9 @@ function CreatePost({ fetchdata }: CreatePostProps) {
         fetchdata();
         toast.success("Successfully created post");
         handleCloseDialog();
-
       })
       .catch((error) => {
         // handle error
-        console.error("Error creating post", error);
         toast.error("Error creating post");
       });
   };

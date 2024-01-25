@@ -4,6 +4,7 @@ import CreatePost from "./CreatePost";
 import axios from "axios";
 import IndividualPostBox from "./IndividualPostBox";
 import { Post } from "../types.interface";
+import toast from "react-hot-toast";
 
 function PostDisplayBox() {
   const [posts, setPosts] = useState<null | Post[]>(null);
@@ -13,7 +14,7 @@ function PostDisplayBox() {
       const response = await axios.get("http://localhost:8080/posts");
       setPosts(response.data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      toast.error("Error fetching data");
     } finally {
       setLoading(false);
     }

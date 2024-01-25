@@ -45,7 +45,6 @@ function IndividualPostPage() {
         navigate("/Home");
       })
       .catch((error) => {
-        console.error("Error deleting post", error);
         toast.error("Error deleting post");
       });
   };
@@ -57,7 +56,7 @@ function IndividualPostPage() {
       );
       setPost(response.data);
     } catch (error) {
-      console.error("Error fetching data:", error);
+      toast.error("Error fetching data");
     } finally {
       setLoading(false);
     }

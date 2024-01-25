@@ -43,7 +43,6 @@ function InputComment({ fetchcomments }: inputCommentProps) {
       })
       .catch((error) => {
         // handle error
-        console.error("Error creating comment", error);
         toast.error("Error creating comment");
       });
   };

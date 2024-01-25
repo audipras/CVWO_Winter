@@ -48,7 +48,6 @@ const EditDialogBox: React.FC<EditPostDialogProps> = ({
         onClose(); // Close the dialog after successful edit
       })
       .catch((error) => {
-        console.error("Error editing post", error);
         toast.error("Error editing post");
       });
   };

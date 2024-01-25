@@ -29,7 +29,6 @@ function Signup() {
       })
       .catch((error) => {
         // handle error
-        console.error("Error signing up", error);
         toast.error("Error signing up");
       });
   };

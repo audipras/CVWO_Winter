@@ -30,7 +30,6 @@ function Signin() {
       })
       .catch((error) => {
         // handle error
-        console.error("Error signing in", error);
         toast.error("Error signing in");
       });
   };
