@@ -1,4 +1,4 @@
 function IndividualPostPage() {
-  return;
+  return <></>;
 }
 export default IndividualPostPage;
