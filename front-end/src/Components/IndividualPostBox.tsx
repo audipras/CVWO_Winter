@@ -1,4 +1,4 @@
-import { Typography } from "@mui/material";
+import { Card, Paper, Typography } from "@mui/material";
 import React, { useState, useEffect } from "react";
 import { Post } from "../types.interface";
 import { Box } from "@mui/system";
@@ -9,19 +9,25 @@ interface postProps {
 
 const IndividualPostBox: React.FC<postProps> = ({ post }) => {
   return (
-    <Box
+    <Paper
       sx={{
         display: "flex",
         flexDirection: "column",
-        height: "15vh",
+        minHeight: "15vh",
         backgroundColor: "grey",
-        paddingTop: "2vh",
+        paddingTop: "1vh",
         borderRadius: "5px",
         marginBottom: "10px",
         border: "1px solid #A9A9A9",
         paddingLeft: "2vh",
         overflow: "hidden",
+        transition: "transform 0.3s",
+        "&:hover": {
+          transform: "scale(1.01)",
+          border: "2px solid #A9A9A9",
+        },
       }}
+      elevation={10}
     >
       <Typography
         sx={{
@@ -41,12 +47,16 @@ const IndividualPostBox: React.FC<postProps> = ({ post }) => {
           fontSize: "1rem",
           overflow: "hidden",
           textOverflow: "ellipsis",
+          display: "-webkit-box",
           whiteSpace: "pre-line",
+          WebkitBoxOrient: "vertical",
+          WebkitLineClamp: 4,
+          wordBreak: "break-word",
         }}
       >
         {post.body}
       </Typography>
-    </Box>
+    </Paper>
   );
 };
 

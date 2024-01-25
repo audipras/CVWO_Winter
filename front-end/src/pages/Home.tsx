@@ -8,6 +8,7 @@ function Home() {
   return (
     <div style={{ display: "flex", flexDirection: "column" }}>
       <Topbar />
+      <div style={{ height: "8vh" }}></div>
       <MainBox>
         <PostDisplayBox />
       </MainBox>

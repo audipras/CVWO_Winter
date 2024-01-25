@@ -22,7 +22,7 @@ func main() {
 	router.POST("/users", controllers.CreateUser)
 	router.GET("/users", controllers.GetUsers)
 	router.DELETE("/users/:id", controllers.DeleteUser)
-	router.POST("/users/:signin", controllers.SignIn)
+	router.POST("/users/signin", controllers.SignIn)
 
 	//Post Struct Routers
 	router.POST("/posts", controllers.CreatePost)

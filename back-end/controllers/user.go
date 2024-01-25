@@ -46,7 +46,11 @@ func SignIn(c *gin.Context) {
 		return
 	}
 
-	database.DB.Where("username = ?", user.Username).First(&databaseUser)
+	if result := database.DB.Where("username = ?", user.Username).First(&databaseUser); result.Error != nil {
+		c.JSON(http.StatusBadRequest, gin.H{"error": result.Error.Error()})
+		return
+	}
+
 	if databaseUser.Password == user.Password {
 		token, err := authorisation.GenerateJWTToken(user.ID)
 		if err != nil {

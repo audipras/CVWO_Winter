@@ -1,38 +1,46 @@
-import { Button, TextField, Typography } from "@mui/material";
+import { Alert, Button, TextField, Typography } from "@mui/material";
 import MainBox from "../Components/MainBox";
 import Topbar from "../Components/Topbar";
 import axios from "axios";
-import { useState } from "react";
+import React, { useState } from "react";
 import { User } from "../types.interface";
 import { Box } from "@mui/system";
+import { Form, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 function Signin() {
+  const navigate = useNavigate();
   const [signInDetails, setSignInDetails] = useState({
     username: "",
     password: "",
   });
 
-  const handleSignIn = (details: User) => {
+  const handleSignIn = (e: React.FormEvent) => {
+    e.preventDefault();
     const backendEndpoint = "http://localhost:8080/users/signin";
     axios
       .post(backendEndpoint, signInDetails)
       .then((response) => {
         // handle success, the backend's response is available in 'response.data'
         console.log("Backend response:", response.data);
+        toast.success("Successfully logged in!");
+        navigate("/home");
       })
       .catch((error) => {
         // handle error
-        console.error("Error creating user:", error);
+        console.error("Error signing in", error);
+        toast.error("Error signing in");
       });
   };
 
   return (
-    <div>
-      <Topbar />
+    <div style={{ height: "98vh" }}>
       <MainBox>
         <Box
+          component="form"
+          onSubmit={handleSignIn}
           sx={{
-            transform: "translateY(-15vh)",
+            transform: "translateY(-10vh)",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -68,14 +76,11 @@ function Signin() {
                 password: e.target.value,
               })
             }
+            type="password"
             placeholder="Password"
             sx={{ paddingBottom: "10px" }}
           />
-          <Button
-            onClick={() => handleSignIn(signInDetails)}
-            color="primary"
-            size="medium"
-          >
+          <Button type="submit" color="primary" size="medium">
             Sign In
           </Button>
         </Box>

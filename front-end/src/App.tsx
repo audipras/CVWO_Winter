@@ -10,10 +10,14 @@ import Home from "./pages/Home";
 import Profile from "./pages/Profile";
 import Circles from "./pages/Circles";
 import Signin from "./pages/Signin";
+import { Toaster } from "react-hot-toast";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
+      <div>
+        <Toaster position="bottom-center" />
+      </div>
       <Router>
         <Routes>
           <Route path="/Home" element={<Home />} />
@@ -21,6 +25,7 @@ function App() {
           <Route path="/Circles" element={<Circles />} />
           <Route path="/Signin" element={<Signin />} />
           <Route path="*" element={<Navigate to="/Home" />} />
+          <Route path="/post/:id" element={<PostPage />} />
           {
             //Default navigating to Home on entry, don't change
           }
